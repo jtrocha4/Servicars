@@ -36,11 +36,11 @@ class NotificationsFragment : Fragment() {
         val estadoTextView: TextView = binding.estadoTextView
 
         //Datos Pruebas
-        val ejemploVehiculo: TextView = binding.ejemploVehiculo
-        val ejemploCliente: TextView = binding.ejemploCliente
-        val ejemploFecha: TextView = binding.ejemploFecha
+        val ejemploVehiculo: TextView = binding.vehiculoTxt
+        val ejemploCliente: TextView = binding.clienteTxt
+        val ejemploFecha: TextView = binding.fechaTxt
         val ejemploMonto: TextView = binding.ejemploMonto
-        val ejemploEstado: TextView = binding.ejemploEstado
+        val ejemploEstado: TextView = binding.estadoTxt
 
 
         notificationsViewModel.text.observe(viewLifecycleOwner) {

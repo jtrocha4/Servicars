@@ -10,6 +10,11 @@ import android.widget.TextView
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.servicars.OrdersProvider
+import com.example.servicars.R
+import com.example.servicars.adapter.OrdersApadter
 import com.example.servicars.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -24,7 +29,9 @@ class HomeFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View {
+
         val homeViewModel =
             ViewModelProvider(this).get(HomeViewModel::class.java)
 
@@ -32,36 +39,16 @@ class HomeFragment : Fragment() {
         val root: View = binding.root
 
         val textView: TextView = binding.textHome
-        //val autoCard: CardView = binding.vehiculoCardView
-        //val vehiculorow: TableRow = binding.VehiculoRow
 
-        val vehiculoTextView: TextView = binding.vehiculoTextView
-        val matriculaTextView: TextView = binding.matriculaTextView
-        val clienteTextView: TextView = binding.clienteTextView
-        val fechaIngresoTextView: TextView = binding.fechaTextView
-        val estadoTextView: TextView = binding.estadoTextView
+        fun initRecyclerView() {
+            binding.recyclerOrders.layoutManager = LinearLayoutManager(requireContext())
+            binding.recyclerOrders.adapter = OrdersApadter(OrdersProvider.OrderList)
+        }
 
-        //Datos de prueba
-        val ejemploVehiculo: TextView = binding.ejemploVehiculo
-        val ejemploMatricula: TextView = binding.ejemploMatricula
-        val ejemploCliente: TextView = binding.ejemploCliente
-        val ejemploFecha: TextView = binding.ejemploFecha
-        val ejemploEstado: TextView = binding.ejemploEstado
-
+        initRecyclerView()
 
         homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
-            vehiculoTextView.text
-            matriculaTextView.text
-            clienteTextView.text
-            fechaIngresoTextView.text
-            estadoTextView.text
-
-            ejemploVehiculo.text
-            ejemploMatricula.text
-            ejemploCliente.text
-            ejemploFecha.text
-            ejemploEstado.text
         }
         return root
     }

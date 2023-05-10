@@ -1,37 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.notifications.NotificationsFragment">
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/text_notifications"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="textStart"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.cardview.widget.CardView
-        android:layout_width="326dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="25dp"
         android:layout_marginEnd="32dp"
+        android:layout_marginBottom="5dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_notifications">
+        app:layout_constraintTop_toTopOf="parent">
 
         <TableLayout
             android:layout_width="325dp"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="10dp">
 
@@ -50,8 +37,25 @@
                 <TextView
                     android:id="@+id/vehiculoTxt"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Chevrolet Tracker 2015 LT" />
+                    android:layout_height="wrap_content" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/matriculaTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="25dp"
+                    android:text="@string/columna_matricula"
+                    android:textAlignment="textStart"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/matriculaTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
             </TableRow>
 
             <TableRow
@@ -69,8 +73,7 @@
                 <TextView
                     android:id="@+id/clienteTxt"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Juan Fernando Quintero" />
+                    android:layout_height="wrap_content" />
             </TableRow>
 
             <TableRow
@@ -81,32 +84,13 @@
                     android:id="@+id/fechaTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
-                    android:text="@string/columna_fecha_transaccion"
+                    android:text="@string/columna_fecha"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/fechaTxt"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="14-04-2023" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/montoTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:text="@string/columna_monto"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/ejemploMonto"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="366000" />
+                    android:layout_height="wrap_content" />
             </TableRow>
 
             <TableRow
@@ -118,16 +102,13 @@
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
                     android:text="@string/columna_estado"
-                    android:textAlignment="textStart"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/estadoTxt"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ingreso" />
+                    android:layout_height="wrap_content" />
             </TableRow>
         </TableLayout>
     </androidx.cardview.widget.CardView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
