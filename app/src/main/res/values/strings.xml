@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">Servicars</string>
+    <string name="title_activity_second">SecondActivity</string>
+    <string name="title_Inicio">Inicio</string>
+    <string name="title_nuevaOrden">Nueva Orden</string>
+    <string name="title_presupuesto">Presupuesto</string>
+    <string name="bienvenido">Bienvenido</string>
+    <string name="peticion_usuario">Usuario</string>
+    <string name="peticion_contraseña">Contraseña</string>
+    <string name="ingresar">Ingresar</string>
+    <string name="peticion_nombre_cliente">Nombre del cliente</string>
+    <string name="peticion_identificacion_cliente">ID cliente</string>
+    <string name="peticion_telefono_cliente">Telefono</string>
+    <string name="peticion_correo_cliente">Correo electronico</string>
+    <string name="seccion_datos_auto" >Datos automovil</string>
+    <string name="peticion_marca_auto">Marca del vehiculo</string>
+    <string name="peticion_modelo_vehiculo">Modelo del vehiculo</string>
+    <string name="peticion_año_vehiculo">Año del vehiculo</string>
+    <string name="peticion_matricula_vehiculo">Matricula del vehiculo</string>
+    <string name="peticion_falla_vehiculo">Fallas o problemas que presenta el vehiculo</string>
+    <string name="guardar_datos">Guardar datos</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="columna_vehiculo">Vehiculo</string>
+    <string name="columna_cliente">Cliente</string>
+    <string name="columna_matricula">Matricula</string>
+    <string name="columna_fecha" >Fecha de ingreso</string>
+    <string name="columna_estado">Estado</string>
+    <string name="columna_fecha_transaccion">Fecha transaccion</string>
+    <string name="columna_monto">Monto</string>
+</resources>
