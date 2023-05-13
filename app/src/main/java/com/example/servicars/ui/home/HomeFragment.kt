@@ -4,16 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TableLayout
-import android.widget.TableRow
 import android.widget.TextView
-import androidx.cardview.widget.CardView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import com.example.servicars.Order
 import com.example.servicars.OrdersProvider
-import com.example.servicars.R
 import com.example.servicars.adapter.OrdersApadter
 import com.example.servicars.databinding.FragmentHomeBinding
 
@@ -40,9 +37,15 @@ class HomeFragment : Fragment() {
 
         val textView: TextView = binding.textHome
 
+        fun onItemSelected(order: Order) {
+            Toast.makeText(requireContext(), order.vehiculo, Toast.LENGTH_SHORT).show()
+        }
+
         fun initRecyclerView() {
             binding.recyclerOrders.layoutManager = LinearLayoutManager(requireContext())
-            binding.recyclerOrders.adapter = OrdersApadter(OrdersProvider.OrderList)
+            binding.recyclerOrders.adapter = OrdersApadter(
+                OrdersProvider.OrderList
+            ) { order -> onItemSelected(order) }
         }
 
         initRecyclerView()

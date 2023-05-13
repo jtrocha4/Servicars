@@ -12,7 +12,7 @@
     <string name="peticion_identificacion_cliente">ID cliente</string>
     <string name="peticion_telefono_cliente">Telefono</string>
     <string name="peticion_correo_cliente">Correo electronico</string>
-    <string name="seccion_datos_auto" >Datos automovil</string>
+    <string name="seccion_datos_auto">Datos automovil</string>
     <string name="peticion_marca_auto">Marca del vehiculo</string>
     <string name="peticion_modelo_vehiculo">Modelo del vehiculo</string>
     <string name="peticion_año_vehiculo">Año del vehiculo</string>
@@ -23,8 +23,12 @@
     <string name="columna_vehiculo">Vehiculo</string>
     <string name="columna_cliente">Cliente</string>
     <string name="columna_matricula">Matricula</string>
-    <string name="columna_fecha" >Fecha de ingreso</string>
+    <string name="columna_fecha">Fecha de ingreso</string>
     <string name="columna_estado">Estado</string>
     <string name="columna_fecha_transaccion">Fecha transaccion</string>
     <string name="columna_monto">Monto</string>
+    <string name="order_vista_detallada">Vista detallada</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="columna_falla">Falla del vehiculo</string>
 </resources>
