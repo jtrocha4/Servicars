@@ -49,7 +49,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/peticion_usuario"
-                android:inputType="text" />
+                android:inputType="text"
+                android:text="admin" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -74,7 +75,7 @@
                 android:layout_height="wrap_content"
                 android:hint="@string/peticion_contraseña"
                 android:inputType="textPassword"
-                />
+                android:text="admin" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button

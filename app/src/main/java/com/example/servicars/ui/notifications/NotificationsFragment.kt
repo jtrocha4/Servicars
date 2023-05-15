@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.example.servicars.databinding.FragmentNotificationsBinding
 
+
 class NotificationsFragment : Fragment() {
 
     private var _binding: FragmentNotificationsBinding? = null

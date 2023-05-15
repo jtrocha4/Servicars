@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
 
     val accesoAdmin = "admin"
 
-    fun cambiarActividad (view: View){
+    fun cambiarActividad(view: View) {
 
         val editUsuario = findViewById<EditText>(R.id.UsuarioEditText)
         val editContraseña = findViewById<EditText>(R.id.ContraseñaEditText)
@@ -24,23 +24,23 @@ class MainActivity : AppCompatActivity() {
         val textUsuario = editUsuario.text.toString()
         val textContraseña = editContraseña.text.toString()
 
-        if(textUsuario.isEmpty()){
+        if (textUsuario.isEmpty()) {
             editUsuario.error = "Ingrese el usuario"
             editUsuario.requestFocus()
             return
         }
 
-        if(textContraseña.isEmpty()){
+        if (textContraseña.isEmpty()) {
             editContraseña.error = "Ingrese la Contraseña"
             editContraseña.requestFocus()
             return
         }
 
-        if(textUsuario==accesoAdmin && textContraseña==accesoAdmin){
+        if (textUsuario == accesoAdmin && textContraseña == accesoAdmin) {
             val secondAct = Intent(this, SecondActivity::class.java)
             startActivity(secondAct)
-        }else{
-            Toast.makeText(this,"Contraseña incorrecta", Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show()
         }
 
     }

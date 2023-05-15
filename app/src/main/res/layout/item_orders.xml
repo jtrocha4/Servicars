@@ -21,8 +21,9 @@
         <TableLayout
             android:layout_width="325dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp">
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp">
 
             <TableRow
                 android:layout_width="match_parent"
@@ -32,14 +33,15 @@
                     android:id="@+id/vehiculoTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
-                    android:text="@string/columna_vehiculo"
+                    android:text="@string/columna_auto"
                     android:textAlignment="textStart"
                     android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/vehiculoTxt"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp" />
             </TableRow>
 
             <TableRow
@@ -57,7 +59,8 @@
                 <TextView
                     android:id="@+id/matriculaTxt"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp" />
             </TableRow>
 
             <TableRow
@@ -75,7 +78,8 @@
                 <TextView
                     android:id="@+id/clienteTxt"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp" />
             </TableRow>
 
             <TableRow
@@ -92,7 +96,8 @@
                 <TextView
                     android:id="@+id/fechaTxt"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp" />
             </TableRow>
 
             <TableRow
@@ -109,7 +114,8 @@
                 <TextView
                     android:id="@+id/estadoTxt"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp" />
             </TableRow>
         </TableLayout>
     </androidx.cardview.widget.CardView>

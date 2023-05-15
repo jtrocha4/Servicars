@@ -11,11 +11,11 @@ class OrdersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
     val binding = ItemOrdersBinding.bind(view)
 
     fun render(orderModel: Order, onClickListener: (Order) -> Unit) {
-        binding.vehiculoTxt.text = orderModel.vehiculo
-        binding.matriculaTxt.text = orderModel.matricula
+        binding.vehiculoTxt.text = "${orderModel.marcaAuto} ${orderModel.modeloAuto} ${orderModel.anioAuto} "
+        binding.matriculaTxt.text = orderModel.matriculaAuto
         binding.clienteTxt.text = orderModel.cliente
-        binding.fechaTxt.text = orderModel.fechaIngreso.toString()
-        binding.estadoTxt.text = orderModel.estado
+        binding.fechaTxt.text = orderModel.fechaIngresoAuto.toString()
+        binding.estadoTxt.text = orderModel.estadoAuto
 
         itemView.setOnClickListener {
             onClickListener(orderModel)

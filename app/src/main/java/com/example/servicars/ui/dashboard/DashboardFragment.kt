@@ -18,6 +18,7 @@ import java.time.LocalDate
 class DashboardFragment : Fragment() {
 
     private var _binding: FragmentDashboardBinding? = null
+
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
@@ -113,6 +114,11 @@ class DashboardFragment : Fragment() {
                 editCorreoCliente.requestFocus()
                 return
             }
+            if (!android.util.Patterns.EMAIL_ADDRESS.matcher(textCorreoCliente).matches()) {
+                editCorreoCliente.error = "Direccion de correo no valida"
+                editCorreoCliente.requestFocus()
+                return
+            }
 
             if (textMarcaAuto.isEmpty()) {
                 editMarcaAuto.error = "Ingrese la marca del automovil"
@@ -140,7 +146,19 @@ class DashboardFragment : Fragment() {
                 return
             }
 
-            val newOrder= Order("$textMarcaAuto $textModeloAuto $textAnioAuto", textMatriculaAuto, textNombreCliente, LocalDate.now())
+            val newOrder = Order(
+                textNombreCliente,
+                textIdCliente.toInt(),
+                textTelefonoCliente.toInt(),
+                textCorreoCliente,
+                textMarcaAuto,
+                textModeloAuto,
+                textAnioAuto.toInt(),
+                textMatriculaAuto,
+                LocalDate.now(),
+                "Pendiente",
+                textFallaAuto
+            )
             OrdersProvider.addOrder(newOrder)
             Toast.makeText(requireContext(), "Datos guardados exitosamente", Toast.LENGTH_SHORT)
                 .show()

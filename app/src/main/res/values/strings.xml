@@ -20,7 +20,7 @@
     <string name="peticion_falla_vehiculo">Fallas o problemas que presenta el vehiculo</string>
     <string name="guardar_datos">Guardar datos</string>
     <string name="cancelar">Cancelar</string>
-    <string name="columna_vehiculo">Vehiculo</string>
+    <string name="columna_auto">Auto</string>
     <string name="columna_cliente">Cliente</string>
     <string name="columna_matricula">Matricula</string>
     <string name="columna_fecha">Fecha de ingreso</string>
@@ -31,4 +31,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="columna_falla">Falla del vehiculo</string>
+    <string name="columna_id_cliente">ID Cliente</string>
+    <string name="columna_telefono_cliente">Telefono</string>
+    <string name="columna_correo_cliente">Correo</string>
 </resources>

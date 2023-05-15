@@ -1,5 +1,6 @@
 package com.example.servicars.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.servicars.DetailActivity
 import com.example.servicars.Order
 import com.example.servicars.OrdersProvider
 import com.example.servicars.adapter.OrdersApadter
@@ -23,14 +25,11 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
 
     ): View {
 
-        val homeViewModel =
-            ViewModelProvider(this).get(HomeViewModel::class.java)
+        val homeViewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         _binding = FragmentHomeBinding.inflate(inflater, container, false)
         val root: View = binding.root
@@ -38,7 +37,21 @@ class HomeFragment : Fragment() {
         val textView: TextView = binding.textHome
 
         fun onItemSelected(order: Order) {
-            Toast.makeText(requireContext(), order.vehiculo, Toast.LENGTH_SHORT).show()
+            //Toast.makeText(requireContext(), order.vehiculo, Toast.LENGTH_SHORT).show()
+            val intent = Intent(requireContext(), DetailActivity::class.java)
+            intent.putExtra("cliente", order.cliente)
+            intent.putExtra("idCliente", order.idCliente)
+            intent.putExtra("telefonoCliente", order.telefonoCliente)
+            intent.putExtra("correoCliente", order.correoCliente)
+            intent.putExtra("marcaAuto", order.marcaAuto)
+            intent.putExtra("modeloAuto", order.modeloAuto)
+            intent.putExtra("anioAuto", order.anioAuto)
+            intent.putExtra("matriculaAuto", order.matriculaAuto)
+            intent.putExtra("fechaIngresoAuto", order.fechaIngresoAuto.toString())
+            intent.putExtra("estadoAuto", order.estadoAuto)
+            intent.putExtra("fallaAuto", order.fallaAuto)
+
+            startActivity(intent)
         }
 
         fun initRecyclerView() {

@@ -40,7 +40,7 @@
                     android:id="@+id/vehiculoTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="25dp"
-                    android:text="@string/columna_vehiculo"
+                    android:text="@string/columna_auto"
                     android:textAlignment="textStart"
                     android:textStyle="bold" />
 
