@@ -28,28 +28,27 @@ class DetailActivity : AppCompatActivity() {
 
         val bundle: Bundle? = intent.extras
 
-
-        val cliente = bundle!!.getString("cliente")
+        val nombreCliente = bundle!!.getString("nombreCliente")
         val idCliente = bundle!!.getInt("idCliente")
         val telefonoCliente = bundle!!.getInt("telefonoCliente")
         val correoCliente = bundle!!.getString("correoCliente")
         val marcaAuto = bundle!!.getString("marcaAuto")
         val modeloAuto = bundle!!.getString("modeloAuto")
         val anioAuto = bundle!!.getInt("anioAuto")
-        val matricula = bundle!!.getString("matriculaAuto")
-        val fechaIngreso = bundle!!.getString("fechaIngresoAuto")
-        val estado = bundle!!.getString("estadoAuto")
-        val falla = bundle!!.getString("fallaAuto")
+        val matriculaAuto = bundle!!.getString("matriculaAuto")
+        val fechaIngresoAuto = bundle!!.getString("fechaIngresoAuto")
+        val estadoAuto = bundle!!.getString("estadoAuto")
+        val fallaAuto = bundle!!.getString("fallaAuto")
 
-        clienteTxt.text = cliente
+        clienteTxt.text = nombreCliente
         idClienteTxt.text = idCliente.toString()
         telefonoClienteTxt.text = telefonoCliente.toString()
         correoClienteTxt.text = correoCliente
         autoTxt.text = "${marcaAuto} ${modeloAuto} ${anioAuto.toString()}"
-        matriculaTxt.text = matricula
-        fechaIngresoTxt.text = fechaIngreso
-        estadoTxt.text = estado
-        fallaTxt.text = falla
+        matriculaTxt.text = matriculaAuto
+        fechaIngresoTxt.text = fechaIngresoAuto
+        estadoTxt.text = estadoAuto
+        fallaTxt.text = fallaAuto
 
     }
 }
