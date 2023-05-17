@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.widget.TextView
 import com.example.servicars.databinding.ActivityDetailBinding
 
-
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var _binding: ActivityDetailBinding

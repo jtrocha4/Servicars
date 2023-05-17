@@ -1,6 +1,7 @@
 package com.example.servicars.ui.dashboard
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +10,12 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.servicars.Order
-import com.example.servicars.OrdersProvider
 import com.example.servicars.databinding.FragmentDashboardBinding
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import java.time.LocalDate
 
 class DashboardFragment : Fragment() {
@@ -25,6 +28,8 @@ class DashboardFragment : Fragment() {
     private lateinit var btnguardar: Button
     private lateinit var btnCancelar: Button
 
+    private val db = FirebaseFirestore.getInstance()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
@@ -32,6 +37,10 @@ class DashboardFragment : Fragment() {
 
         _binding = FragmentDashboardBinding.inflate(inflater, container, false)
         val root: View = binding.root
+
+        val currentUsuario = FirebaseAuth.getInstance().currentUser
+        val emailCurrentUsuario = currentUsuario?.email
+        Log.i("Current User Firebase", emailCurrentUsuario.toString())
 
         val textView: TextView = binding.textDashboard
         val nombreClienteInput: TextInputLayout = binding.NombreClienteInputLayout
@@ -146,7 +155,7 @@ class DashboardFragment : Fragment() {
                 return
             }
 
-            val newOrder = Order(
+            /*val newOrder = Order(
                 textNombreCliente,
                 textIdCliente.toInt(),
                 textTelefonoCliente.toInt(),
@@ -159,10 +168,26 @@ class DashboardFragment : Fragment() {
                 "Pendiente",
                 textFallaAuto
             )
-            OrdersProvider.addOrder(newOrder)
+            OrdersProvider.addOrder(newOrder)*/
+
+            val order = hashMapOf(
+                "nombreCliente" to textNombreCliente,
+                "idCliente" to textIdCliente.toInt(),
+                "telefonoCliente" to textTelefonoCliente.toInt(),
+                "correoCliente" to textCorreoCliente,
+                "marcaAuto" to textMarcaAuto,
+                "modeloAuto" to textModeloAuto,
+                "anioAuto" to textAnioAuto.toInt(),
+                "matriculaAuto" to textMatriculaAuto,
+                "fechaIngresoAuto" to LocalDate.now().toString(),
+                "estadoAuto" to "Pendiente",
+                "fallaAuto" to textFallaAuto,
+            )
+
+            db.collection(emailCurrentUsuario.toString()).add(order)
             Toast.makeText(requireContext(), "Datos guardados exitosamente", Toast.LENGTH_SHORT)
                 .show()
-            limpiarInputs(view)
+            //limpiarInputs(view)
         }
 
         //OnclickListener

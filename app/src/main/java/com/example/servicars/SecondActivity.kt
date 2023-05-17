@@ -1,6 +1,7 @@
 package com.example.servicars
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
@@ -11,6 +12,7 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.servicars.databinding.ActivitySecondBinding
+import com.example.servicars.ui.dashboard.DashboardFragment
 
 class SecondActivity : AppCompatActivity() {
 
