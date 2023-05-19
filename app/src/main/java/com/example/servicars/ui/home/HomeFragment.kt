@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,9 +17,11 @@ import com.example.servicars.adapter.OrdersApadter
 import com.example.servicars.databinding.FragmentHomeBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.Query
 import com.google.firebase.firestore.QuerySnapshot
 
 class HomeFragment : Fragment() {
@@ -47,13 +50,6 @@ class HomeFragment : Fragment() {
 
         OrderArrayList = arrayListOf()
 
-        val data = db.collection(emailCurrentUsuario.toString()).get()
-        data.addOnSuccessListener { result ->
-            for (document in result) {
-                Log.d("Lectura FireStores", "${document.id} => ${document.data}")
-            }
-        }
-
         val textView: TextView = binding.textHome
 
         fun onItemSelected(order: Order) {
@@ -74,13 +70,34 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
-        fun EventChangeListener() {
+        fun onItemEdit(view: View) {
+            Toast.makeText(requireContext(), "Editar orden", Toast.LENGTH_SHORT).show()
+        }
 
+        fun onItemDelete(order: Order) {
+            val orderReference = db.collection(emailCurrentUsuario.toString())
+            val query = orderReference.whereEqualTo("matriculaAuto", order.matriculaAuto)
+            query.get().addOnSuccessListener { querySnapshot ->
+                for (document in querySnapshot) {
+                    document.reference.delete().addOnSuccessListener {
+                        Toast.makeText(
+                            requireContext(), "Orden eliminada exitosamente", Toast.LENGTH_SHORT
+                        ).show()
+                    }.addOnFailureListener {
+                        Toast.makeText(
+                            requireContext(), "Error al eliminar la orden", Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
+        }
+
+        //Lectura Firestore
+        fun EventChangeListener() {
             db.collection(emailCurrentUsuario.toString())
                 .addSnapshotListener(object : EventListener<QuerySnapshot> {
                     override fun onEvent(
-                        value: QuerySnapshot?,
-                        error: FirebaseFirestoreException?
+                        value: QuerySnapshot?, error: FirebaseFirestoreException?
                     ) {
                         if (error != null) {
                             Log.e("Lectura FireStore", error.message.toString())
@@ -99,7 +116,10 @@ class HomeFragment : Fragment() {
         fun initRecyclerView() {
             binding.recyclerOrders.layoutManager = LinearLayoutManager(requireContext())
             OrderArrayList = arrayListOf()
-            Adapter = OrdersApadter(OrderArrayList) { order -> onItemSelected(order) }
+            Adapter = OrdersApadter(OrderArrayList,
+                onClickListener = { order -> onItemSelected(order) },
+                onClickDelete = { order -> onItemDelete(order) },
+                onClickEdit = { onItemEdit(root.rootView) })
             binding.recyclerOrders.adapter = Adapter
         }
 

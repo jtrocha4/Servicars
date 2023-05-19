@@ -156,21 +156,6 @@ class DashboardFragment : Fragment() {
                 return
             }
 
-            /*val newOrder = Order(
-                textNombreCliente,
-                textIdCliente.toInt(),
-                textTelefonoCliente.toInt(),
-                textCorreoCliente,
-                textMarcaAuto,
-                textModeloAuto,
-                textAnioAuto.toInt(),
-                textMatriculaAuto,
-                LocalDate.now(),
-                "Pendiente",
-                textFallaAuto
-            )
-            OrdersProvider.addOrder(newOrder)*/
-
             val order = hashMapOf(
                 "nombreCliente" to textNombreCliente,
                 "idCliente" to textIdCliente.toInt(),
@@ -188,7 +173,7 @@ class DashboardFragment : Fragment() {
             db.collection(emailCurrentUsuario.toString()).add(order)
             Toast.makeText(requireContext(), "Datos guardados exitosamente", Toast.LENGTH_SHORT)
                 .show()
-            //limpiarInputs(view)
+            limpiarInputs(view)
         }
 
         //OnclickListener
