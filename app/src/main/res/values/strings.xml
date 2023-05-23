@@ -35,4 +35,5 @@
     <string name="columna_telefono_cliente">Telefono</string>
     <string name="columna_correo_cliente">Correo</string>
     <string name="boton_registrar">Registrar</string>
+    <string name="editar_datos">Editar</string>
 </resources>

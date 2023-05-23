@@ -13,7 +13,7 @@ class OrdersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         orderModel: Order,
         onClickListener: (Order) -> Unit,
         onClickDelete: (Order) -> Unit,
-        onClickEdit: () -> Unit
+        onClickEdit: (Order) -> Unit
     ) {
         binding.vehiculoTxt.text =
             "${orderModel.marcaAuto} ${orderModel.modeloAuto} ${orderModel.anioAuto} "
@@ -27,7 +27,7 @@ class OrdersViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         }
 
         binding.editBtn.setOnClickListener {
-            onClickEdit()
+            onClickEdit.invoke(orderModel)
         }
 
         itemView.setOnClickListener {

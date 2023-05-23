@@ -10,7 +10,7 @@ class OrdersApadter(
     private val orderList: ArrayList<Order>,
     private val onClickListener: (Order) -> Unit,
     private val onClickDelete: (Order) -> Unit,
-    private val onClickEdit: () -> Unit
+    private val onClickEdit: (Order) -> Unit
 ) : RecyclerView.Adapter<OrdersViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): OrdersViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)

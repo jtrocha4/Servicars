@@ -13,7 +13,9 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.servicars.DetailActivity
 import com.example.servicars.Order
+import com.example.servicars.R
 import com.example.servicars.adapter.OrdersApadter
+import com.example.servicars.components.EditOrderDialog
 import com.example.servicars.databinding.FragmentHomeBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.DocumentChange
@@ -70,9 +72,22 @@ class HomeFragment : Fragment() {
             startActivity(intent)
         }
 
-        fun onItemEdit(view: View) {
-            Toast.makeText(requireContext(), "Editar orden", Toast.LENGTH_SHORT).show()
+        fun onItemEdit(order: Order) {
+            val dialogFragment = EditOrderDialog()
+            val args = Bundle().apply {
+                putString(
+                    EditOrderDialog.ARG_VEHICULO,
+                    "${order.marcaAuto} ${order.modeloAuto} ${order.anioAuto}"
+                )
+                putString(EditOrderDialog.ARG_MATRICULA, "${order.matriculaAuto}")
+                putString(EditOrderDialog.ARG_CLIENTE, "${order.nombreCliente}")
+                putString(EditOrderDialog.ARG_FECHAINGRESO, "${order.fechaIngresoAuto}")
+                putString(EditOrderDialog.ARG_ESTADO, "${order.estadoAuto}")
+            }
+            dialogFragment.arguments = args
+            dialogFragment.show(parentFragmentManager, "EditOrderDialog")
         }
+
 
         fun onItemDelete(order: Order) {
             val orderReference = db.collection(emailCurrentUsuario.toString())
@@ -119,7 +134,7 @@ class HomeFragment : Fragment() {
             Adapter = OrdersApadter(OrderArrayList,
                 onClickListener = { order -> onItemSelected(order) },
                 onClickDelete = { order -> onItemDelete(order) },
-                onClickEdit = { onItemEdit(root.rootView) })
+                onClickEdit = { order -> onItemEdit(order) })
             binding.recyclerOrders.adapter = Adapter
         }
 
