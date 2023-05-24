@@ -17,6 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.tasks.await
 import java.time.LocalDate
 
 class DashboardFragment : Fragment() {
@@ -170,8 +171,16 @@ class DashboardFragment : Fragment() {
                 "fallaAuto" to textFallaAuto,
             )
 
-            db.collection(emailCurrentUsuario.toString()).add(order)
-            Toast.makeText(requireContext(), "Datos guardados exitosamente", Toast.LENGTH_SHORT)
+            val nuevoUser = hashMapOf(
+                "email" to emailCurrentUsuario
+            )
+
+//            db.collection(emailCurrentUsuario.toString()).add(order)
+
+            val userCollectionRef = db.collection("user").document(emailCurrentUsuario.toString())
+            val orderCollectionRef = userCollectionRef.collection("order").add(order)
+
+            Toast.makeText(requireContext(), "Orden guardada exitosamente", Toast.LENGTH_SHORT)
                 .show()
             limpiarInputs(view)
         }

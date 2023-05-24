@@ -88,9 +88,30 @@ class HomeFragment : Fragment() {
             dialogFragment.show(parentFragmentManager, "EditOrderDialog")
         }
 
+        fun EventChangeListener() {
+            db.collection("user").document(emailCurrentUsuario.toString())
+                .collection("order").addSnapshotListener(object : EventListener<QuerySnapshot> {
+                    override fun onEvent(
+                        value: QuerySnapshot?,
+                        error: FirebaseFirestoreException?
+                    ) {
+                        if (error != null) {
+                            Log.e("Lectura FireStore", error.message.toString())
+                            return
+                        }
+                        for (doc: DocumentChange in value?.documentChanges!!) {
+                            if (doc.type == DocumentChange.Type.ADDED) {
+                                OrderArrayList.add(doc.document.toObject(Order::class.java))
+                            }
+                        }
+                        Adapter.notifyDataSetChanged()
+                    }
+                })
+        }
 
         fun onItemDelete(order: Order) {
-            val orderReference = db.collection(emailCurrentUsuario.toString())
+            val orderReference = db.collection("user").document(emailCurrentUsuario.toString())
+                .collection("order")
             val query = orderReference.whereEqualTo("matriculaAuto", order.matriculaAuto)
             query.get().addOnSuccessListener { querySnapshot ->
                 for (document in querySnapshot) {
@@ -107,27 +128,6 @@ class HomeFragment : Fragment() {
             }
         }
 
-        //Lectura Firestore
-        fun EventChangeListener() {
-            db.collection(emailCurrentUsuario.toString())
-                .addSnapshotListener(object : EventListener<QuerySnapshot> {
-                    override fun onEvent(
-                        value: QuerySnapshot?, error: FirebaseFirestoreException?
-                    ) {
-                        if (error != null) {
-                            Log.e("Lectura FireStore", error.message.toString())
-                            return
-                        }
-                        for (doc: DocumentChange in value?.documentChanges!!) {
-                            if (doc.type == DocumentChange.Type.ADDED) {
-                                OrderArrayList.add(doc.document.toObject(Order::class.java))
-                            }
-                        }
-                        Adapter.notifyDataSetChanged()
-                    }
-                })
-        }
-
         fun initRecyclerView() {
             binding.recyclerOrders.layoutManager = LinearLayoutManager(requireContext())
             OrderArrayList = arrayListOf()
@@ -136,10 +136,10 @@ class HomeFragment : Fragment() {
                 onClickDelete = { order -> onItemDelete(order) },
                 onClickEdit = { order -> onItemEdit(order) })
             binding.recyclerOrders.adapter = Adapter
+            EventChangeListener()
         }
 
         initRecyclerView()
-        EventChangeListener()
 
         homeViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
