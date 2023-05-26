@@ -1,13 +1,27 @@
 package com.example.servicars.ui.notifications
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.servicars.Quote
+import com.example.servicars.adapter.QuoteAdapter
 import com.example.servicars.databinding.FragmentNotificationsBinding
+import com.example.servicars.ui.quote.QuoteActivity
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.EventListener
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreException
+import com.google.firebase.firestore.QuerySnapshot
 
 
 class NotificationsFragment : Fragment() {
@@ -17,47 +31,67 @@ class NotificationsFragment : Fragment() {
     // This property is only valid between onCreateView and
     // onDestroyView.
     private val binding get() = _binding!!
+    private val db = FirebaseFirestore.getInstance()
+    lateinit var QuoteArrayList: ArrayList<Quote>
+    lateinit var Adapter: QuoteAdapter
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        val notificationsViewModel =
-            ViewModelProvider(this).get(NotificationsViewModel::class.java)
+        val notificationsViewModel = ViewModelProvider(this).get(NotificationsViewModel::class.java)
 
         _binding = FragmentNotificationsBinding.inflate(inflater, container, false)
         val root: View = binding.root
 
-        val textView: TextView = binding.textNotifications
-        val vehiculoTextView: TextView = binding.vehiculoTextView
-        val clienteTextView: TextView = binding.clienteTextView
-        val fechaTransTextView: TextView = binding.fechaTextView
-        val montoTextView: TextView = binding.montoTextView
-        val estadoTextView: TextView = binding.estadoTextView
+        val textView: TextView = binding.textQuote
 
-        //Datos Pruebas
-        val ejemploVehiculo: TextView = binding.vehiculoTxt
-        val ejemploCliente: TextView = binding.clienteTxt
-        val ejemploFecha: TextView = binding.fechaTxt
-        val ejemploMonto: TextView = binding.ejemploMonto
-        val ejemploEstado: TextView = binding.estadoTxt
+        val currentUsuario = FirebaseAuth.getInstance().currentUser
+        val emailCurrentUsuario = currentUsuario?.email
 
+        val agregarQuote: Button = binding.agregarBtn
+        agregarQuote.setOnClickListener {
+            val intent = Intent(requireContext(), QuoteActivity::class.java)
+            startActivity(intent)
+        }
+
+        fun onItemSelect(quote: Quote) {
+
+        }
+
+        fun EventChangeListener() {
+            db.collection("user").document(emailCurrentUsuario.toString())
+                .collection("quote").addSnapshotListener(object : EventListener<QuerySnapshot> {
+                    override fun onEvent(
+                        value: QuerySnapshot?,
+                        error: FirebaseFirestoreException?
+                    ) {
+                        if (error != null) {
+                            Log.e("Lectura FireStore", error.message.toString())
+                            return
+                        }
+                        for (doc: DocumentChange in value?.documentChanges!!) {
+                            if (doc.type == DocumentChange.Type.ADDED) {
+                                QuoteArrayList.add(doc.document.toObject(Quote::class.java))
+                            }
+                        }
+                        Adapter.notifyDataSetChanged()
+                    }
+                })
+        }
+
+        fun initRecyclerView() {
+            binding.recyclerQuote.layoutManager = LinearLayoutManager(requireContext())
+            QuoteArrayList = arrayListOf()
+            Adapter =
+                QuoteAdapter(QuoteArrayList, onClickListener = { quote -> onItemSelect(quote) })
+            binding.recyclerQuote.adapter = Adapter
+            EventChangeListener()
+        }
+
+        initRecyclerView()
 
         notificationsViewModel.text.observe(viewLifecycleOwner) {
             textView.text = it
-            vehiculoTextView.text
-            clienteTextView.text
-            fechaTransTextView.text
-            montoTextView.text
-            estadoTextView.text
-
-            ejemploVehiculo.text
-            ejemploCliente.text
-            ejemploFecha.text
-            ejemploMonto.text
-            ejemploEstado.text
-
         }
         return root
     }

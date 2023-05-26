@@ -171,12 +171,6 @@ class DashboardFragment : Fragment() {
                 "fallaAuto" to textFallaAuto,
             )
 
-            val nuevoUser = hashMapOf(
-                "email" to emailCurrentUsuario
-            )
-
-//            db.collection(emailCurrentUsuario.toString()).add(order)
-
             val userCollectionRef = db.collection("user").document(emailCurrentUsuario.toString())
             val orderCollectionRef = userCollectionRef.collection("order").add(order)
 

@@ -36,4 +36,7 @@
     <string name="columna_correo_cliente">Correo</string>
     <string name="boton_registrar">Registrar</string>
     <string name="editar_datos">Editar</string>
+    <string name="peticion_monto">Monto</string>
+    <string name="boton_nueva_cotizacion">Nueva cotizacion</string>
+    <string name="columna_descripcion_quote">Descripcion</string>
 </resources>

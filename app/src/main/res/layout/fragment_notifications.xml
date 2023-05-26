@@ -1,130 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.notifications.NotificationsFragment">
+    android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/text_notifications"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:textAlignment="textStart"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical"
+        tools:context=".ui.quote.QuoteActivity">
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="25dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_notifications">
+        <TextView
+            android:id="@+id/textQuote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="25dp"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-        <TableLayout
-            android:layout_width="325dp"
-            android:layout_height="match_parent"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="10dp">
+        <Button
+            android:id="@+id/agregarBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="25dp"
+            android:drawableEnd="@drawable/baseline_add_24"
+            android:text="@string/boton_nueva_cotizacion" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerQuote"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="65dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textQuote" />
 
-                <TextView
-                    android:id="@+id/vehiculoTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:text="@string/columna_auto"
-                    android:textAlignment="textStart"
-                    android:textStyle="bold" />
+    </LinearLayout>
 
-                <TextView
-                    android:id="@+id/vehiculoTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Chevrolet Tracker 2015 LT" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/clienteTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:text="@string/columna_cliente"
-                    android:textAlignment="textStart"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/clienteTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Juan Fernando Quintero" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/fechaTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:text="@string/columna_fecha_transaccion"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/fechaTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="14-04-2023" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/montoTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:text="@string/columna_monto"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/ejemploMonto"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="366000" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/estadoTextView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="25dp"
-                    android:text="@string/columna_estado"
-                    android:textAlignment="textStart"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/estadoTxt"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Ingreso" />
-            </TableRow>
-        </TableLayout>
-    </androidx.cardview.widget.CardView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
