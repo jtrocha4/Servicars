@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -54,8 +55,25 @@ class NotificationsFragment : Fragment() {
             startActivity(intent)
         }
 
-        fun onItemSelect(quote: Quote) {
-
+        fun onItemDelete(quote: Quote) {
+            val orderReference = db.collection("user").document(emailCurrentUsuario.toString())
+                .collection("quote")
+            val query = orderReference.whereEqualTo("matriculaAuto", quote.matriculaAuto)
+            query.get().addOnSuccessListener { querySnapshot ->
+                for (document in querySnapshot) {
+                    document.reference.delete().addOnSuccessListener {
+                        Toast.makeText(
+                            requireContext(),
+                            "Cotizacion eliminada exitosamente",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }.addOnFailureListener {
+                        Toast.makeText(
+                            requireContext(), "Error al eliminar la cotizacion", Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                }
+            }
         }
 
         fun EventChangeListener() {
@@ -83,7 +101,7 @@ class NotificationsFragment : Fragment() {
             binding.recyclerQuote.layoutManager = LinearLayoutManager(requireContext())
             QuoteArrayList = arrayListOf()
             Adapter =
-                QuoteAdapter(QuoteArrayList, onClickListener = { quote -> onItemSelect(quote) })
+                QuoteAdapter(QuoteArrayList, onClickDelete = { quote -> onItemDelete(quote) })
             binding.recyclerQuote.adapter = Adapter
             EventChangeListener()
         }

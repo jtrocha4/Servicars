@@ -17,6 +17,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageButton
+            android:id="@+id/deleteQuoteBtn"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginHorizontal="320dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/button_delete_background"
+            android:elevation="3dp"
+            android:visibility="visible"
+            app:srcCompat="@drawable/outline_delete_24"></ImageButton>
+
         <TableLayout
             android:layout_width="327dp"
             android:layout_height="wrap_content"
